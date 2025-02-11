@@ -26,22 +26,25 @@ export async function POST(req: Request) {
 
     // Generate JWT Token
     const token = jwt.sign(
-      { userId: user._id, email: user.email , role : user.role },
+      { userId: user._id, email: user.email, isAdmin: user.isAdmin },
       process.env.JWT_SECRET!,
-      {
-        expiresIn: "7d",
-      }
+      { expiresIn: "7d" }
     );
+    
 
     const response = NextResponse.json(
       { message: "Login successful", token },
       { status: 200 }
     );
 
-    response.headers.set(
-      "Set-Cookie",
-      `token=${token}; HttpOnly; Path=/; Secure; SameSite=Strict`
-    );
+    response.cookies.set("token", token , {
+      httpOnly: false,
+      path: "/",
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days in milliseconds
+    });
+
 
     return response;
   

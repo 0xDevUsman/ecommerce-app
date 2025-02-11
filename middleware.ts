@@ -4,31 +4,25 @@ import jwt from "jsonwebtoken";
 export async function middleware(req: NextRequest) {
   const token = req.cookies.get("token")?.value;
 
-  const protectedRoutes = ["/api/orders", "/api/cart", "/dashboard"];
+  const adminRoutes = ["/api/products", "/api/orders/:id"];
 
-  if (protectedRoutes.some((route) => req.nextUrl.pathname.startsWith(route))) {
-    if (!token) {
-      return new NextResponse(
-        JSON.stringify({ message: "Unauthorized: Please log in" }),
-        { status: 401, headers: { "Content-Type": "application/json" } }
-      );
-    }
-
-    try {
-      jwt.verify(token, process.env.JWT_SECRET as string);
-      return NextResponse.next();
-    } catch {
-      return new NextResponse(
-        JSON.stringify({ message: "Invalid token, please log in again" }),
-        { status: 401, headers: { "Content-Type": "application/json" } }
-      );
-    }
+  if (!token) {
+    return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
   }
 
-  return NextResponse.next();
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as jwt.JwtPayload & { isAdmin: boolean };
+
+    if (adminRoutes.includes(req.nextUrl.pathname) && !decoded.isAdmin) {
+      return NextResponse.json({ message: "Access denied" }, { status: 403 });
+    }
+
+    return NextResponse.next();
+  } catch {
+    return NextResponse.json({ message: "Invalid token" }, { status: 401 });
+  }
 }
 
-// Apply middleware to API routes and dashboard
 export const config = {
-  matcher: ["/api/:path*", "/dashboard"],
+  matcher: ["/api/:path*"],
 };
