@@ -1,28 +1,11 @@
-import { NextRequest, NextResponse } from "next/server";
-import jwt from "jsonwebtoken";
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
 
-export async function middleware(req: NextRequest) {
-  const token = req.cookies.get("token")?.value;
-
-  const adminRoutes = ["/api/products", "/api/orders/:id"];
-
-  if (!token) {
-    return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
-  }
-
-  try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as jwt.JwtPayload & { isAdmin: boolean };
-
-    if (adminRoutes.includes(req.nextUrl.pathname) && !decoded.isAdmin) {
-      return NextResponse.json({ message: "Access denied" }, { status: 403 });
-    }
-
-    return NextResponse.next();
-  } catch {
-    return NextResponse.json({ message: "Invalid token" }, { status: 401 });
-  }
+export function middleware(request: NextRequest) {
+  return NextResponse.redirect(new URL('/home', request.url))
 }
-
+ 
+// See "Matching Paths" below to learn more
 export const config = {
-  matcher: ["/api/:path*"],
-};
+  matcher: '/about/:path*',
+}
