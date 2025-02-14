@@ -26,6 +26,7 @@ const Register = () => {
         password,
       });
       console.log(data.message);
+      window.location.href = "/login";
       toast.success(data.message);
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -51,7 +52,7 @@ const Register = () => {
         />
       </div>
 
-      <div className="absolute bottom-5 left-5 bg-opacity-50 px-4 py-2 rounded-lg">
+      <div className="absolute bottommongo-5 left-5 bg-opacity-50 px-4 py-2 rounded-lg">
         <div className="flex items-end justify-center gap-1">
           <h1 className="text-black text-xl md:text-3xl font-extrabold">
             TECH WAVES.
