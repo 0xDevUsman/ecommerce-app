@@ -8,6 +8,8 @@ import shipping from "../public/assets/icons/shipping.svg";
 import dollar from "../public/assets/icons/dollar.svg";
 import support from "../public/assets/icons/support.svg";
 import payment from "../public/assets/icons/payment.svg";
+import Footer from "./components/Footer";
+
 const page = () => {
   return (
     <>
@@ -20,8 +22,8 @@ const page = () => {
               alt="Description of image"
               className="min-w-screen"
             />
-            <div className="absolute top-[40%] left-[27%] transform -translate-x-1/2 -translate-y-1/2">
-              <h1 className="text-6xl text-black font-bold">
+            <div className="absolute top-[40%] left-[30%] transform -translate-x-1/2 -translate-y-1/2  px-4">
+              <h1 className="text-4xl md:text-6xl text-black font-bold">
                 Unleash Innovation <br /> in Every Byte.
               </h1>
               <h1 className="text-lg mt-2 mb-7">
@@ -36,7 +38,7 @@ const page = () => {
             <h1 className="text-3xl font-semibold text-center pb-6">
               New Collections
             </h1>
-            <div className="flex flex-wrap justify-around gap-4 p-4">
+            <div className="flex flex-wrap justify-center gap-4 p-4">
               <Cards
                 name="Beoplay M5 Bluetooth Speaker"
                 price={599}
@@ -61,32 +63,29 @@ const page = () => {
           </main>
           <main className="mx-auto w-[90%] mt-6 mb-10 relative">
             <div className="flex justify-center items-center gap-4 p-4">
-              <div>
+              <div className="w-full md:w-1/2">
                 <h1 className="text-4xl font-bold pb-6">Deals of the Months</h1>
                 <p className="text-lg font-medium">
-                  Get ready for a shopping experince like never before with our
+                  Get ready for a shopping experience like never before with our
                   Deals of the Month!
                   <br />
-                  Every purchase come with exclusive deals and discounts,making
-                  thihs month a celebration of savvy choices and amazing deals.
+                  Every purchase comes with exclusive deals and discounts,
+                  making this month a celebration of savvy choices and amazing deals.
                   Don&apos;t miss out!
                 </p>
-                <br />
-                <br />
-                <br />
-                <button className="bg-black hover:opacity-85 text-white font-bold py-2 px-4 rounded-lg">
+                <button className="bg-black hover:opacity-85 text-white font-bold py-2 px-4 rounded-lg mt-6">
                   View Products
                 </button>
               </div>
-              <div>
+              <div className="w-full md:w-1/2">
                 <Image src={deals} alt="" />
               </div>
             </div>
           </main>
           <main>
             <div className="flex justify-center items-center gap-4 p-4">
-              <div className="flex justify-around gap-8 p-8 w-full rounded-xl">
-                <div className="flex flex-col items-start w-[300px] text-start bg-white p-6 rounded hover:scale-105 transform transition-all duration-300">
+              <div className="flex flex-wrap justify-center gap-8 p-8 w-full rounded-xl">
+                <div className="flex flex-col items-start w-full sm:w-[300px] text-start bg-white p-6 rounded-lg hover:scale-105 transform transition-all duration-300">
                   <Image
                     src={shipping}
                     alt="Free Shipping"
@@ -99,8 +98,7 @@ const page = () => {
                     Get free shipping on orders over $99.00.
                   </p>
                 </div>
-
-                <div className="flex flex-col items-start w-[300px] text-start bg-white p-6 rounded-lg hover:scale-105 transform transition-all duration-300">
+                <div className="flex flex-col items-start w-full sm:w-[300px] text-start bg-white p-6 rounded-lg hover:scale-105 transform transition-all duration-300">
                   <Image
                     src={dollar}
                     alt="Best Prices"
@@ -114,8 +112,7 @@ const page = () => {
                     products.
                   </p>
                 </div>
-
-                <div className="flex flex-col items-start w-[300px] text-start bg-white p-6 rounded-lg hover:scale-105 transform transition-all duration-300">
+                <div className="flex flex-col items-start w-full sm:w-[300px] text-start bg-white p-6 rounded-lg hover:scale-105 transform transition-all duration-300">
                   <Image
                     src={support}
                     alt="Customer Support"
@@ -128,8 +125,7 @@ const page = () => {
                     Our customer support is available 24/7 to assist you.
                   </p>
                 </div>
-
-                <div className="flex flex-col items-start w-[300px] text-start bg-white p-6 rounded-lg hover:scale-105 transform transition-all duration-300">
+                <div className="flex flex-col items-start w-full sm:w-[300px] text-start bg-white p-6 rounded-lg hover:scale-105 transform transition-all duration-300">
                   <Image
                     src={payment}
                     alt="Secure Payment"
@@ -148,6 +144,7 @@ const page = () => {
           </main>
         </section>
       </div>
+      <Footer/>
     </>
   );
 };

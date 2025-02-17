@@ -2,13 +2,14 @@ import Link from "next/link";
 import React from "react";
 import logo from "../../public/logo-black.svg";
 import Image from "next/image";
+
 const Navbar = () => {
   return (
     <>
       <div>
-        <nav className="flex justify-between items-center px-20 pt-6 pb-2">
+        <nav className="flex justify-between items-center px-6 md:px-20 pt-6 pb-2">
           <Image width={200} src={logo} alt="logo" />
-          <div className="flex gap-10 items-center font-bold">
+          <div className="flex gap-10 items-center font-bold text-sm md:text-lg">
             <Link className="text-lg" href={"/"}>
               Home
             </Link>
