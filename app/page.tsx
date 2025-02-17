@@ -9,6 +9,7 @@ import dollar from "../public/assets/icons/dollar.svg";
 import support from "../public/assets/icons/support.svg";
 import payment from "../public/assets/icons/payment.svg";
 import Footer from "./components/Footer";
+import Link from "next/link";
 
 const page = () => {
   return (
@@ -29,9 +30,9 @@ const page = () => {
               <h1 className="text-lg mt-2 mb-7">
                 Explore a World of Cutting-Edge Tech.
               </h1>
-              <button className="bg-black hover:opacity-85 text-white font-bold py-2 px-4 rounded-lg">
+              <Link href={'/products'} className="bg-black hover:opacity-85 text-white font-bold py-3 px-6 rounded-lg mt-8">
                 Shop now
-              </button>
+              </Link>
             </div>
           </main>
           <main>
@@ -61,11 +62,11 @@ const page = () => {
               />
             </div>
           </main>
-          <main className="mx-auto w-[90%] mt-6 mb-10 relative">
+          <main className="mx-auto w-[90%] mt-6 mb-10">
             <div className="flex justify-center items-center gap-4 p-4">
               <div className="w-full md:w-1/2">
                 <h1 className="text-4xl font-bold pb-6">Deals of the Months</h1>
-                <p className="text-lg font-medium">
+                <p className="text-lg font-medium pb-10">
                   Get ready for a shopping experience like never before with our
                   Deals of the Month!
                   <br />
@@ -73,9 +74,9 @@ const page = () => {
                   making this month a celebration of savvy choices and amazing deals.
                   Don&apos;t miss out!
                 </p>
-                <button className="bg-black hover:opacity-85 text-white font-bold py-2 px-4 rounded-lg mt-6">
+                <Link href={'/products'} className="bg-black hover:opacity-85 text-white font-bold py-3 px-6 rounded-lg mt-8  ">
                   View Products
-                </button>
+                </Link>
               </div>
               <div className="w-full md:w-1/2">
                 <Image src={deals} alt="" />
