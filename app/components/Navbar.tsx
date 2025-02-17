@@ -16,7 +16,7 @@ const Navbar = () => {
               Shop
             </Link>
             <Link
-              className="text-lg px-6 flex items-center py-2 bg-black text-white text-center rounded-lg font-bold"
+              className="text-lg px-6 flex items-center py-2 bg-black text-white text-center rounded-lg font-bold hover:opacity-85"
               href={"/login"}
             >
               Login
