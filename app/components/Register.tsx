@@ -5,7 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { toast } from "react-toastify";
 import axios from "axios";
-
+import registerImage from '../../public/assets/images/image-2.svg'
+import logo from '../../public/logo-black.svg'
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -44,7 +45,7 @@ const Register = () => {
       {/* Left Side - Image Cover */}
       <div className="relative w-full md:w-1/2 h-1/3 md:h-full">
         <Image
-          src="https://images.unsplash.com/photo-1698663371785-677d13f21570?q=80&w=1827&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          src={registerImage}
           alt="Left Side Image"
           layout="fill"
           objectFit="cover"
@@ -52,13 +53,10 @@ const Register = () => {
         />
       </div>
 
-      <div className="absolute bottom-5 left-5 bg-opacity-50 px-4 py-2 rounded-lg">
+      <div className="absolute top-5 left-5 bg-opacity-50 px-4 py-2 rounded-lg">
         <div className="flex items-end justify-center gap-1">
-          <h1 className="text-black text-xl md:text-3xl font-extrabold">
-            TECH WAVES.
-          </h1>
+          <Image width={250} src={logo} alt="logo"/>
         </div>
-        <div className="w-full h-0.5 mt-0.5 bg-black"></div>
       </div>
 
       {/* Right Side - Form Section */}

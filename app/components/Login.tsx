@@ -5,6 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { toast } from "react-toastify";
 import axios from "axios";
+import loginImage from '../../public/assets/images/image-1.svg'
+import logo from '../../public/logo-black.svg'
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -38,7 +40,7 @@ const Login = () => {
         {/* Left Side - Image Cover */}
         <div className="relative w-full md:w-1/2 h-1/3 md:h-full">
           <Image
-            src="https://images.unsplash.com/photo-1635841172808-372fb4371458?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            src={loginImage}
             alt="Left Side Image"
             layout="fill"
             objectFit="cover"
@@ -48,11 +50,8 @@ const Login = () => {
 
         <div className="absolute top-5 left-5 bg-opacity-50 px-4 py-2 rounded-lg">
           <div className="flex items-end justify-center gap-1">
-            <h1 className="text-black text-xl md:text-3xl font-extrabold">
-              TECH WAVES.
-            </h1>
+          <Image  width={250}  src={logo} alt="logo"/>
           </div>
-          <div className="w-full h-0.5 mt-0.5 bg-black"></div>
         </div>
 
         {/* Right Side - Form Section */}
