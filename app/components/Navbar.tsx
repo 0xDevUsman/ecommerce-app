@@ -26,6 +26,9 @@ const Navbar = () => {
             </Link>
           </div>
         </nav>
+        <div className="flex justify-center items-center">
+          <div className="h-0.5 w-[95%] bg-[#242323] rounded-full"></div>
+        </div>
       </div>
     </>
   );
