@@ -4,12 +4,9 @@ import Image from "next/image";
 import hero from "../public/admin ui/hero/hero-1.png";
 import Cards from "./components/Cards";
 import deals from "../public/assets/images/image-4.svg";
-import shipping from "../public/assets/icons/shipping.svg";
-import dollar from "../public/assets/icons/dollar.svg";
-import support from "../public/assets/icons/support.svg";
-import payment from "../public/assets/icons/payment.svg";
 import Footer from "./components/Footer";
 import Link from "next/link";
+import Support from "./components/Support";
 
 const page = () => {
   return (
@@ -30,7 +27,10 @@ const page = () => {
               <h1 className="text-lg mt-2 mb-7">
                 Explore a World of Cutting-Edge Tech.
               </h1>
-              <Link href={'/products'} className="bg-black hover:opacity-85 text-white font-bold py-3 px-6 rounded-lg mt-8">
+              <Link
+                href={"/products"}
+                className="bg-black hover:opacity-85 text-white font-bold py-3 px-6 rounded-lg mt-8"
+              >
                 Shop now
               </Link>
             </div>
@@ -71,10 +71,13 @@ const page = () => {
                   Deals of the Month!
                   <br />
                   Every purchase comes with exclusive deals and discounts,
-                  making this month a celebration of savvy choices and amazing deals.
-                  Don&apos;t miss out!
+                  making this month a celebration of savvy choices and amazing
+                  deals. Don&apos;t miss out!
                 </p>
-                <Link href={'/products'} className="bg-black hover:opacity-85 text-white font-bold py-3 px-6 rounded-lg mt-8  ">
+                <Link
+                  href={"/products"}
+                  className="bg-black hover:opacity-85 text-white font-bold py-3 px-6 rounded-lg mt-8  "
+                >
                   View Products
                 </Link>
               </div>
@@ -84,68 +87,11 @@ const page = () => {
             </div>
           </main>
           <main>
-            <div className="flex justify-center items-center gap-4 p-4">
-              <div className="flex flex-wrap justify-center gap-8 p-8 w-full rounded-xl">
-                <div className="flex flex-col items-start w-full sm:w-[300px] text-start bg-white p-6 rounded-lg hover:scale-105 transform transition-all duration-300">
-                  <Image
-                    src={shipping}
-                    alt="Free Shipping"
-                    className="w-10 h-10 mb-4"
-                  />
-                  <h1 className="text-2xl font-semibold text-gray-800 mb-2">
-                    Free Shipping
-                  </h1>
-                  <p className="text-base font-medium text-gray-600">
-                    Get free shipping on orders over $99.00.
-                  </p>
-                </div>
-                <div className="flex flex-col items-start w-full sm:w-[300px] text-start bg-white p-6 rounded-lg hover:scale-105 transform transition-all duration-300">
-                  <Image
-                    src={dollar}
-                    alt="Best Prices"
-                    className="w-10 h-10 mb-4"
-                  />
-                  <h1 className="text-2xl font-semibold text-gray-800 mb-2">
-                    Best Prices
-                  </h1>
-                  <p className="text-base font-medium text-gray-600">
-                    Shop with confidence and get the best prices on top-quality
-                    products.
-                  </p>
-                </div>
-                <div className="flex flex-col items-start w-full sm:w-[300px] text-start bg-white p-6 rounded-lg hover:scale-105 transform transition-all duration-300">
-                  <Image
-                    src={support}
-                    alt="Customer Support"
-                    className="w-10 h-10 mb-4"
-                  />
-                  <h1 className="text-2xl font-semibold text-gray-800 mb-2">
-                    24/7 Support
-                  </h1>
-                  <p className="text-base font-medium text-gray-600">
-                    Our customer support is available 24/7 to assist you.
-                  </p>
-                </div>
-                <div className="flex flex-col items-start w-full sm:w-[300px] text-start bg-white p-6 rounded-lg hover:scale-105 transform transition-all duration-300">
-                  <Image
-                    src={payment}
-                    alt="Secure Payment"
-                    className="w-10 h-10 mb-4"
-                  />
-                  <h1 className="text-2xl font-semibold text-gray-800 mb-2">
-                    Secure Payment
-                  </h1>
-                  <p className="text-base font-medium text-gray-600">
-                    We offer secure and trusted payment methods for all
-                    transactions.
-                  </p>
-                </div>
-              </div>
-            </div>
+            <Support/>
           </main>
         </section>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };
