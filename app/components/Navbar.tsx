@@ -23,7 +23,6 @@ const Navbar = () => {
       .split("; ")
       .find((c) => c.startsWith("token="));
     const token = tokenCookie?.split("=")[1];
-
     if (token) {
       try {
         const decoded = jwtDecode<User>(token);
@@ -42,7 +41,6 @@ const Navbar = () => {
       <nav className="flex justify-between items-center px-6 md:px-20 pt-6 pb-2">
         <Link className="text-lg" href={"/"}>
           <Image width={200} src={logo} alt="logo" />
-          <h1>{user ? user.email : "Guest"}</h1>
         </Link>
         <div className="flex gap-10 items-center font-bold text-sm md:text-lg">
           <Link className="text-lg" href={"/"}>

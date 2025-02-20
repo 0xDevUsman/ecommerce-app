@@ -42,5 +42,5 @@ export function middleware(req: NextRequest) {
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: "/api/:path",
+  matcher: ["/api/:path*", "/profile/:profile*"]
 };
