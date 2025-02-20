@@ -4,7 +4,7 @@ import React from "react";
 import Navbar from "../components/Navbar"; // Assuming you have a Navbar component
 import Image from "next/image";
 import Link from "next/link";
-
+import deleteIcon from "../../public/assets/icons/delete.svg";
 const Cart = () => {
   const cartItems = [
     {
@@ -56,6 +56,7 @@ const Cart = () => {
                     <th className="border px-4 py-2">Product</th>
                     <th className="border px-4 py-2">Quantity</th>
                     <th className="border px-4 py-2">Subtotal</th>
+                    <th className="border px-4 py-2"></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -87,6 +88,15 @@ const Cart = () => {
                       </td>
                       <td className="border px-4 py-2 text-right">
                         ${(item.price * item.quantity).toFixed(2)}
+                      </td>
+                      <td className="border px-4 py-2 text-center w-20">
+                        <div className="flex justify-center">
+                          <Image
+                            src={deleteIcon}
+                            className="cursor-pointer text-center"
+                            alt="Delete Icon"
+                          />
+                        </div>
                       </td>
                     </tr>
                   ))}

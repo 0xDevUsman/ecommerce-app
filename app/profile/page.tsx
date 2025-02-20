@@ -11,7 +11,7 @@ const page = () => {
   return (
     <>
       <Navbar />
-      <div className="w-[90%] mx-auto mt-10 mb-[60px]">
+      <div className="w-[90%] mx-auto mt-10 mb-[71px]">
         <h1 className="text-3xl font-bold">My Profile</h1>
         <div className="flex items-center mt-10">
           <div className="flex w-1/3 justify-center flex-col items-start">
