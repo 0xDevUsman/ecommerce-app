@@ -9,6 +9,7 @@ import order from "../../public/assets/icons/orders.svg";
 import logout from "../../public/assets/icons/logout.svg";
 import Image from "next/image";
 import Link from "next/link";
+import axios from "axios";
 
 interface User {
   userId: string;
@@ -23,12 +24,9 @@ const Profile = () => {
     // Option A: Get user details directly from token
     const fetchUserDetails = async () => {
       try {
-        const res = await fetch("/api/profile", {
-          method: "GET",
-          credentials: "include", // ensures cookies are sent
-        });
-        const data = await res.json();
-        if (res.ok) {
+        const res = await axios.get("/api/profile")
+        const data = res.data;
+        if (res.status === 200) {
           setUser(data.user);
         } else {
           console.log(data.message || "Failed to fetch user details");

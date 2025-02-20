@@ -1,9 +1,34 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
-import { products } from "../data";
 import Image from "next/image";
 import Footer from "../components/Footer";
+import axios from "axios";
+import Link from "next/link";
+interface Product {
+  _id: string | number;
+  name: string;
+  description: string;
+  price: number;
+  images: string;
+}
+
 const Products = () => {
+  const [product, setProduct] = useState<Product[]>([]);
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get("/api/products");
+        if (response.status === 200) {
+          setProduct(response.data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchProducts();
+  }, []);
+
   return (
     <>
       <Navbar />
@@ -48,8 +73,9 @@ const Products = () => {
 
           {/* Product Grid */}
           <section className="w-[90%] flex flex-wrap justify-between gap-6">
-            {products.map((data, index) => (
-              <div
+            {product.map((data, index) => (
+              <Link
+                href={`/products/${data._id}`}
                 key={index}
                 className="border w-[300px] p-4 rounded-lg flex items-center flex-col bg-white shadow-md transition-transform duration-300 transform hover:scale-105 cursor-pointer"
               >
@@ -65,7 +91,7 @@ const Products = () => {
                   <p className="text-gray-600 text-sm">{data.description}</p>
                   <p className="text-lg font-bold mt-2">${data.price}.00</p>
                 </div>
-              </div>
+              </Link>
             ))}
           </section>
         </main>

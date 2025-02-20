@@ -1,24 +1,14 @@
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { NextResponse, type NextRequest } from "next/server";
 import jwt from "jsonwebtoken";
+
 export function middleware(req: NextRequest) {
-  const protectedRoutes = ["/api/cart", "/api/orders"];
+  const { pathname } = req.nextUrl;
+  const method = req.method;
   const adminRoutes = ["/api/products", "/api/orders/:id"];
 
-  if (protectedRoutes.some((route) => req.nextUrl.pathname.startsWith(route))) {
-    const token = req.cookies.get("token")?.value;
-    if (!token) {
-      return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
-    }
-    try {
-      jwt.verify(token, process.env.JWT_SECRET!);
-    } catch (error) {
-      console.error(error);
-      return NextResponse.json({ error: "Server error" }, { status: 500 });
-    }
-  }
-
-  if (adminRoutes.some((route) => req.nextUrl.pathname.startsWith(route))) {
+  // Only check admin routes for non-GET requests
+  if (method !== "GET" && adminRoutes.some(route => pathname.startsWith(route))) {
     const token = req.cookies.get("token")?.value;
     if (!token) {
       return NextResponse.redirect("/login");
@@ -32,15 +22,10 @@ export function middleware(req: NextRequest) {
       if (!decoded.isAdmin) {
         return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
       }
-    } catch (error) {
-      console.error(error);
-      return NextResponse.json({ error: "Server error" }, { status: 500 });
+    } catch (error: any) {
+      console.error("JWT Error:", error.message);
+      return NextResponse.json({ error: error.message || "Server error" }, { status: 500 });
     }
   }
   return NextResponse.next();
 }
-
-// See "Matching Paths" below to learn more
-export const config = {
-  matcher: ["/api/:path*", "/profile/:profile*"]
-};
