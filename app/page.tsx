@@ -2,11 +2,12 @@ import React from "react";
 import Navbar from "./components/Navbar";
 import Image from "next/image";
 import hero from "../public/admin ui/hero/hero-1.png";
-import Cards from "./components/Cards";
 import deals from "../public/assets/images/image-4.svg";
 import Footer from "./components/Footer";
 import Link from "next/link";
 import Support from "./components/Support";
+import Collection from "./components/Collection";
+// import { Collection } from "mongoose";
 
 const page = () => {
   return (
@@ -40,26 +41,9 @@ const page = () => {
               New Collections
             </h1>
             <div className="flex flex-wrap justify-center gap-4 p-4">
-              <Cards
-                name="Beoplay M5 Bluetooth Speaker"
-                price={599}
-                image="https://imgs.search.brave.com/ZTCkJnEyP-lrPHibspe9-xTmmL6eTqB3V142SWOTVD8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90YXJn/ZXQuc2NlbmU3LmNv/bS9pcy9pbWFnZS9U/YXJnZXQvR1VFU1Rf/YjUxMzE1NTgtMjI4/Yy00N2EyLWI5OWIt/ZGNjNDc5MTM2Yjlj/P3dpZD04MDAmaGVp/PTgwMCZxbHQ9ODAm/Zm10PXBqcGVn"
-              />
-              <Cards
-                name="Apple Smart Watch 6 - Special Edition"
-                price={599}
-                image="https://imgs.search.brave.com/uRuNtJ7PcOz8NgCuAVgC2jaEL4FuCK2gQIDy8_gdIPQ/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/bW9zLmNtcy5mdXR1/cmVjZG4ubmV0L0R5/U0ttTVM0RVJUWmlw/WGV0Z3hybi0zMjAt/ODAucG5n"
-              />
-              <Cards
-                name="Bluetooth Speaker"
-                price={599}
-                image="https://imgs.search.brave.com/94_dWRW0Pxs21ZgVAhlorC5mBH9yAK1FoztzS8RTFhc/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/Z3JhdmFzdGFyLmNv/bS9jZG4vc2hvcC9m/aWxlcy8xX2E2MjVh/NGM5LTM4ZDItNDNj/Mi04MzVhLWU1YjQ3/ODIwNzE3Yy53ZWJw/P3Y9MTcxNjQ2OTgz/OSZ3aWR0aD0xNTAw"
-              />
-              <Cards
-                name="Macbook Pro 2021"
-                price={599}
-                image="https://imgs.search.brave.com/l3kU2ikPIP_tEx48_5ZrP7ZUyQnj9WAxee-twiMm-iU/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/ZWxnaWdhbnRlbi5k/ay9yZXNvdXJjZS9i/bG9iLzU3NzgwNDQv/ZTYyMzhkYzgyNDM0/NzUzZTdjOTk1YmI1/YWU4MTBlZjMvYXBw/bGUtbWFjYm9vay1h/aXItbTMtdGVhc2Vy/LWltYWdlLWRhdGEu/anBn"
-              />
+              {/* Replace this with the correct component or remove it */}
+              {/* <Collection/> */}
+              <Collection/>
             </div>
           </main>
           <main className="mx-auto w-[90%] mt-6 mb-10">
