@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { toast } from "react-toastify";
 import axios from "axios";
-import registerImage from '../../public/assets/images/image-2.svg'
+import registerImage from '../../public/assets/image /image-2.svg'
 import logo from '../../public/logo-black.svg'
 const Register = () => {
   const [name, setName] = useState("");

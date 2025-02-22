@@ -10,7 +10,7 @@ interface Product {
   name: string;
   description: string;
   price: number;
-  images: string;
+  image: string;
 }
 
 const Products = () => {
@@ -18,9 +18,10 @@ const Products = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get("/api/products");
+        const response = await axios.get("http://localhost:3000/api/products");
         if (response.status === 200) {
           setProduct(response.data);
+          console.log(response.data)
         }
       } catch (error) {
         console.log(error);
@@ -83,7 +84,7 @@ const Products = () => {
                   className="rounded-t-lg object-cover"
                   width={250}
                   height={250}
-                  src={data.images}
+                  src={data.image}
                   alt=""
                 />
                 <div>

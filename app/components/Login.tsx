@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { toast } from "react-toastify";
 import axios from "axios";
-import loginImage from '../../public/assets/images/image-1.svg'
+import loginImage from '../../public/assets/image /image-1.svg'
 import logo from '../../public/logo-black.svg'
 const Login = () => {
   const [email, setEmail] = useState("");

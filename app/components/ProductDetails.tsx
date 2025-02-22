@@ -9,7 +9,7 @@ import { jwtDecode } from "jwt-decode";
 
 interface Product {
   _id: string;
-  images: string;
+  image : string;
   name: string;
   category: string;
   price: number;
@@ -28,6 +28,7 @@ interface ProductDetailsProps {
 
 const ProductDetails = ({ product }: ProductDetailsProps) => {
   const [user, setUser] = useState<User | null>(null);
+  // const [productDetail , setProductDetail] = useState("")
 
   useEffect(() => {
     // Get token from cookies.
@@ -58,12 +59,13 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
       if (user) {
         const res = await axios.post(
           "http://localhost:3000/api/cart",
-          { productId: product._id, quantity: 1 , images : product.images},
+          { productId: product._id, quantity: 1},
           { withCredentials: true } // Ensure cookies are sent
         );
         if (res.status === 200) {
           alert("Product added to cart successfully!");
         }
+        // console.log(res)
       }
       else {
         alert("Please login to add products to the cart.");
@@ -73,7 +75,14 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
       console.error("Add to cart error:", error);
     }
   };
-
+  // const fetchProductDetailes = async ()=>{
+  //   try {
+  //     const response = await axios.get<Product>(`http://localhost:3000/api/products/${productId}`);
+  //     setProduct(response.data);
+  //   } catch (error) {
+  //     console.error("Failed to fetch product details:", error);
+  //   }
+  // }
   return (
     <>
       <Navbar />
@@ -82,7 +91,7 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
           <div className="flex justify-center items-center">
             <Image
               className="rounded-t-lg object-cover bg-black"
-              src={product.images}
+              src={product.image }
               width={1000}
               height={1000}
               alt={product.name}
@@ -118,6 +127,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   try {
     // Use an absolute URL if needed, e.g.:
     const res = await axios.get(`http://localhost:3000/api/products/${id}`);
+    // console.log(res)
     const product = res.data;
     return { props: { product } };
   } catch (error) {

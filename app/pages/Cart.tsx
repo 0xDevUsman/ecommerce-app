@@ -9,11 +9,11 @@ import Link from "next/link";
 import axios from "axios";
 
 interface CartItem {
-  image: string;
   productId: string;
   name: string;
   price: number;
   quantity: number;
+  image: string;
 }
 
 
@@ -49,7 +49,7 @@ const CartPage = () => {
         });
         // Ensure response data has cart property
         const data = response.data;
-        console.log(data);
+        // console.log(data);
         if (data && data.cart) {
           setCartItems(data.cart);
         } else {
@@ -95,7 +95,7 @@ const CartPage = () => {
                     <tr key={index}>
                       <td className="border px-4 py-2">
                         <Image
-                          src={item.image}
+                          src={item.image || ""}
                           alt={item.name}
                           width={64}
                           height={64}

@@ -34,7 +34,7 @@ export const POST = async (req: NextRequest) => {
     }
 
     // 🔹 Check if product exists
-    const   product = await Products.findById(productId);
+    const product = await Products.findById(productId);
     if (!product) {
       return NextResponse.json(
         { message: "Product not found" },
@@ -63,12 +63,12 @@ export const POST = async (req: NextRequest) => {
       cart.items.push({
         product: new mongoose.Types.ObjectId(productId),
         quantity,
-        image: product.images,
       });
     }
 
     // 🔹 Save the cart and return response
     await cart.save();
+    // console.log(cart)
     return NextResponse.json({ message: "Product added to cart", cart });
   } catch (error) {
     console.error(error);
@@ -110,7 +110,7 @@ export const GET = async (req: NextRequest) => {
         _id: string;
         name: string;
         price: number;
-        image: string ;
+        image : string ;
       };
       quantity: number;
     }
@@ -121,7 +121,7 @@ export const GET = async (req: NextRequest) => {
         name: item.product.name,
         price: item.product.price,
         quantity: item.quantity,
-        image: item.product.image,
+        image: item.product.image ,
       })),
     });
     
