@@ -9,7 +9,7 @@ export const POST = async () => {
     );
 
     // ✅ Remove the cookie that stores the JWT token
-    response.cookies.set("token", "", { httpOnly: true, expires: new Date(0) });
+    response.cookies.set("token", "", { httpOnly: false, expires: new Date(0) });
 
     return response;
   } catch (error) {

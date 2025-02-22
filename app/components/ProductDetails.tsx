@@ -1,9 +1,11 @@
+"use client";
 import Footer from "@/app/components/Footer";
 import Navbar from "@/app/components/Navbar";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { GetServerSideProps } from "next";
+import { jwtDecode } from "jwt-decode";
 
 interface Product {
   _id: string;
@@ -14,14 +16,64 @@ interface Product {
   description: string;
 }
 
+interface User {
+  userId: string;
+  email: string;
+  isAdmin: boolean;
+}
+
 interface ProductDetailsProps {
   product: Product | null;
 }
 
 const ProductDetails = ({ product }: ProductDetailsProps) => {
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    // Get token from cookies.
+    // This is a simple cookie parser, assuming your cookie format is "token=..."
+    const tokenCookie = document.cookie
+      .split("; ")
+      .find((c) => c.startsWith("token="));
+    const token = tokenCookie?.split("=")[1];
+    if (token) {
+      try {
+        const decoded = jwtDecode<User>(token);
+        setUser(decoded);
+      } catch (error) {
+        console.error("Error decoding token", error);
+        setUser(null);
+      }
+    } else {
+      setUser(null);
+    }
+  }, []);
+
   if (!product) {
     return <p>Product not found.</p>;
   }
+  const addToCart = async () => {
+    try {
+      // Assuming quantity is 1 by default
+      if (user) {
+        const res = await axios.post(
+          "/api/cart",
+          { productId: product._id, quantity: 1 },
+          { withCredentials: true } // Ensure cookies are sent
+        );
+        if (res.status === 200) {
+          alert("Product added to cart successfully!");
+        }
+      }
+      else {
+        alert("Please login to add products to the cart.");
+        window.location.href = '/login';
+      }
+    } catch (error: unknown) {
+      console.error("Add to cart error:", error);
+    }
+  };
+
   return (
     <>
       <Navbar />
@@ -46,7 +98,10 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
           <h1 className="pb-8 font-bold">${product.price}.00</h1>
           <h1 className="pb-2 font-bold">Description</h1>
           <p className="pb-10">{product.description}</p>
-          <button className="bg-black text-white px-6 py-2 rounded-lg mt-4 hover:opacity-85 w-full">
+          <button
+            onClick={addToCart}
+            className="bg-black text-white px-6 py-2 rounded-lg mt-4 hover:opacity-85 w-full"
+          >
             Add to cart
           </button>
         </div>

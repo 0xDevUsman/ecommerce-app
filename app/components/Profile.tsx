@@ -46,6 +46,18 @@ const Profile = () => {
     return <p>Loading...</p>;
   }
 
+  const logoutHandler = async () =>{
+    try {
+      const response = await axios.post("/api/auth/logout");
+      if (response.status === 200) {
+        window.location.href = "/";
+      } else {
+        console.log("Failed to log out");
+      }
+    } catch (error) {
+      console.error("Failed to log out:", error);
+    }
+  }
   return (
     <>
       <Navbar />
@@ -67,13 +79,13 @@ const Profile = () => {
               <Image width={30} height={30} src={order} alt="" />
               <h1>My Orders</h1>
             </Link>
-            <Link
-              href={"/"}
-              className="flex rounded-lg  gap-4 mt-4 w-full justiry-between p-4 bg-gray-100 hover:bg-gray-300 transition-all duration-150"
+            <div
+             onClick={logoutHandler}
+              className="flex rounded-lg cursor-pointer  gap-4 mt-4 w-full justiry-between p-4 bg-gray-100 hover:bg-gray-300 transition-all duration-150"
             >
               <Image width={30} height={30} src={logout} alt="" />
               <h1>Logout</h1>
-            </Link>
+            </div>
           </div>
           <div className="ml-10 w-2/3">
             <h1 className="text-2xl font-bold">Personal Information</h1>

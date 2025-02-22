@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
 import Cards from "./Cards";
+
 interface Product {
   _id: string | number;
   name: string;
@@ -10,8 +11,10 @@ interface Product {
   price: number;
   images: string;
 }
+
 const Collection = () => {
   const [product, setProduct] = useState<Product[]>([]);
+
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -28,20 +31,11 @@ const Collection = () => {
 
   return (
     <>
-      {product.slice(0,4).map((data, index) => {
-        return (
-          <>
-            <Link key={index} href={`/products/${data._id}`}>
-              <Cards
-                key={index}
-                name={data.name}
-                price={data.price}
-                image={data.images}
-              />
-            </Link>
-          </>
-        );
-      })}
+      {product.slice(0, 4).map((data) => (
+        <Link key={data._id} href={`/products/${data._id}`}>
+          <Cards name={data.name} price={data.price} image={data.images} />
+        </Link>
+      ))}
     </>
   );
 };

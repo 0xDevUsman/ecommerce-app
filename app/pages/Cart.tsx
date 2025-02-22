@@ -1,30 +1,30 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import React from "react";
-import Navbar from "../components/Navbar"; // Assuming you have a Navbar component
+import React, { useEffect, useState } from "react";
+import Navbar from "../components/Navbar";
 import Image from "next/image";
-import Link from "next/link";
 import deleteIcon from "../../public/assets/icons/delete.svg";
-const Cart = () => {
-  const cartItems = [
-    {
-      id: 1,
-      image:
-        "https://imgs.search.brave.com/qpMmoP_iOYEkuEvHq5k7S3WCFk3r93rv-eD6UrqgP-I/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9kb2l0/LmlsbGlub2lzLmdv/di9jb250ZW50L2Rh/bS9zb2kvZW4vd2Vi/L2RvaXQvaW1hZ2Vz/L3Byb2R1Y3RzL3Bl/cnNvbmFsLWNvbXB1/dGVycy9wdWJsaXNo/aW5naW1hZ2VzL2Fw/cGxlLW1hYy1wcm8u/anBn",
-      name: "15-inch MacBook Air (2TB) Midnight",
-      price: 2099.0,
-      quantity: 1,
-    },
-    {
-      id: 2,
-      image:
-        "https://imgs.search.brave.com/qpMmoP_iOYEkuEvHq5k7S3WCFk3r93rv-eD6UrqgP-I/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9kb2l0/LmlsbGlub2lzLmdv/di9jb250ZW50L2Rh/bS9zb2kvZW4vd2Vi/L2RvaXQvaW1hZ2Vz/L3Byb2R1Y3RzL3Bl/cnNvbmFsLWNvbXB1/dGVycy9wdWJsaXNo/aW5naW1hZ2VzL2Fw/cGxlLW1hYy1wcm8u/anBn",
-      name: "15-inch MacBook Air (2TB) Midnight",
-      price: 2099.0,
-      quantity: 1,
-    },
-    // Add more items as needed
-  ];
+import Link from "next/link";
+import axios from "axios";
+
+interface CartItem {
+  image: string,
+  productId: string;
+  name: string;
+  price: number;
+  quantity: number;
+}
+
+interface CartData {
+  message: string;
+  cart: CartItem[];
+}
+
+const CartPage = () => {
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string>("");
 
   const calculateSubtotal = () => {
     return cartItems.reduce(
@@ -37,14 +37,43 @@ const Cart = () => {
   const deliveryCharge = 0; // You can make this dynamic if needed
   const grandTotal = subtotal + deliveryCharge;
 
+
+
+  useEffect(() => {
+    // Function to fetch cart data using Axios
+    const fetchCart = async () => {
+      try {
+        const response = await axios.get<CartData>("/api/cart", {
+          withCredentials: true, // send cookies
+        });
+        // Ensure response data has cart property
+        const data = response.data;
+        if (data && data.cart) {
+          setCartItems(data.cart);
+        } else {
+          setCartItems([]);
+        }
+      } catch (err: any) {  
+        console.error(err);
+        setError(err.response?.data?.message || "Failed to load cart");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCart();
+  }, []);
+
+  if (loading) return <p>Loading cart...</p>;
+  if (error) return <p>{error}</p>;
+
   return (
     <>
       <Navbar />
-      <div className="container mx-auto p-4 w-[90%] h-screen">
-        <h1 className="text-2xl font-bold mb-4">Cart</h1>
-
-        {cartItems.length === 0 ? (
-          <p className="text-gray-500">Your cart is empty.</p>
+      <div className="container mx-auto p-4">
+        <h1 className="text-2xl font-bold mb-4">Your Cart</h1>
+        {(!cartItems || cartItems.length === 0) ? (
+          <p>Your cart is empty</p>
         ) : (
           <div className="flex flex-col md:flex-row gap-4">
             <div className="md:w-2/3">
@@ -60,8 +89,8 @@ const Cart = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {cartItems.map((item) => (
-                    <tr key={item.id}>
+                  {cartItems.map((item , index) => (
+                    <tr key={index}>
                       <td className="border px-4 py-2">
                         <Image
                           src={item.image}
@@ -154,4 +183,4 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+export default CartPage;

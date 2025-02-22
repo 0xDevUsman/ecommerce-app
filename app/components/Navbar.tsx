@@ -49,9 +49,15 @@ const Navbar = () => {
           <Link className="text-lg" href={"/products"}>
             Shop
           </Link>
-          <Link href={"/cart"}>
-            <Image src={cart} alt="Cart" />
-          </Link>
+          {user ? (
+            <>
+              <Link href={"/cart"}>
+                <Image src={cart} alt="Cart" />
+              </Link>
+            </>
+          ) : (
+            ""
+          )}
           {user ? (
             <>
               <Link href={"/profile"}>
