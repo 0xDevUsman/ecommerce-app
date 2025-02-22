@@ -9,12 +9,13 @@ import Link from "next/link";
 import axios from "axios";
 
 interface CartItem {
-  image: string,
+  image: string;
   productId: string;
   name: string;
   price: number;
   quantity: number;
 }
+
 
 interface CartData {
   message: string;
@@ -43,11 +44,12 @@ const CartPage = () => {
     // Function to fetch cart data using Axios
     const fetchCart = async () => {
       try {
-        const response = await axios.get<CartData>("/api/cart", {
+        const response = await axios.get<CartData>("http://localhost:3000/api/cart", {
           withCredentials: true, // send cookies
         });
         // Ensure response data has cart property
         const data = response.data;
+        console.log(data);
         if (data && data.cart) {
           setCartItems(data.cart);
         } else {

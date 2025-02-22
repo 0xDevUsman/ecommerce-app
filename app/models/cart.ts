@@ -10,8 +10,12 @@ const cartSchema = new Schema({
         required: true,
       },
       quantity: { type: Number, required: true },
+      image: {
+        type: mongoose.Schema.Types.Array || mongoose.Schema.Types.String,
+        required: true,
+      },
     },
-  ],
+  ],  
 });
 
 export default mongoose.models.Cart || mongoose.model("Cart", cartSchema);
