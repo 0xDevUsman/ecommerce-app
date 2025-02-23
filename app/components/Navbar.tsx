@@ -17,8 +17,6 @@ const Navbar = () => {
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    // Get token from cookies.
-    // This is a simple cookie parser, assuming your cookie format is "token=..."
     const tokenCookie = document.cookie
       .split("; ")
       .find((c) => c.startsWith("token="));

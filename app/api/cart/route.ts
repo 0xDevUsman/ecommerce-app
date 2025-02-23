@@ -10,7 +10,6 @@ export const POST = async (req: NextRequest) => {
   try {
     await connectDB();
 
-    // 🔹 Extract token properly (since req.cookies.get() won't work in API routes)
     const cookies = req.headers.get("cookie") || "";
     const token = cookies
       .split("; ")
@@ -21,19 +20,16 @@ export const POST = async (req: NextRequest) => {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
 
-    // 🔹 Verify JWT
     const decoded = jwt.verify(
       token,
       process.env.JWT_SECRET!
     ) as jwt.JwtPayload & { userId: string };
 
-    // 🔹 Extract and validate input
     const { productId, quantity } = await req.json();
     if (!productId || quantity < 1) {
       return NextResponse.json({ message: "Invalid request" }, { status: 400 });
     }
 
-    // 🔹 Check if product exists
     const product = await Products.findById(productId);
     if (!product) {
       return NextResponse.json(
@@ -42,7 +38,6 @@ export const POST = async (req: NextRequest) => {
       );
     }
 
-    // 🔹 Find or create user's cart
     let cart = await Cart.findOne({
       user: new mongoose.Types.ObjectId(decoded.userId),
     });
@@ -53,12 +48,11 @@ export const POST = async (req: NextRequest) => {
       });
     }
 
-    // 🔹 Check if product is already in the cart
     const cartItem = cart.items.find(
       (item: any) => item.product.toString() === productId
     );
     if (cartItem) {
-      cartItem.quantity += quantity; // Increase quantity
+      cartItem.quantity += quantity;
     } else {
       cart.items.push({
         product: new mongoose.Types.ObjectId(productId),
@@ -66,9 +60,7 @@ export const POST = async (req: NextRequest) => {
       });
     }
 
-    // 🔹 Save the cart and return response
     await cart.save();
-    // console.log(cart)
     return NextResponse.json({ message: "Product added to cart", cart });
   } catch (error) {
     console.error(error);
@@ -138,7 +130,6 @@ export const DELETE = async (req: NextRequest) => {
   try {
     await connectDB();
 
-    // 🔹 Extract token from cookies
     const cookies = req.headers.get("cookie") || "";
     const token = cookies
       .split("; ")
@@ -149,13 +140,11 @@ export const DELETE = async (req: NextRequest) => {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
 
-    // 🔹 Verify JWT
     const decoded = jwt.verify(
       token,
       process.env.JWT_SECRET!
     ) as jwt.JwtPayload & { userId: string };
 
-    // 🔹 Extract and validate product ID
     const { productId } = await req.json();
     if (!productId || !mongoose.Types.ObjectId.isValid(productId)) {
       return NextResponse.json(
@@ -164,7 +153,6 @@ export const DELETE = async (req: NextRequest) => {
       );
     }
 
-    // 🔹 Find the user's cart
     const cart = await Cart.findOne({
       user: new mongoose.Types.ObjectId(decoded.userId),
     });
@@ -172,7 +160,6 @@ export const DELETE = async (req: NextRequest) => {
       return NextResponse.json({ message: "Cart not found" }, { status: 404 });
     }
 
-    // 🔹 Check if the product exists in the cart
     const productIndex = cart.items.findIndex(
       (item: any) => item.product.toString() === productId
     );
@@ -183,7 +170,6 @@ export const DELETE = async (req: NextRequest) => {
       );
     }
 
-    // 🔹 Remove the product from the cart
     cart.items.splice(productIndex, 1);
     await cart.save();
 

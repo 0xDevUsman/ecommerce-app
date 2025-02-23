@@ -33,8 +33,6 @@ const CartPage = () => {
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    // Get token from cookies.
-    // This is a simple cookie parser, assuming your cookie format is "token=..."
     const tokenCookie = document.cookie
       .split("; ")
       .find((c) => c.startsWith("token="));
@@ -64,20 +62,18 @@ const CartPage = () => {
   };
 
   const subtotal = calculateSubtotal();
-  const deliveryCharge = 0; // You can make this dynamic if needed
+  const deliveryCharge = 0;
   const grandTotal = subtotal + deliveryCharge;
 
   useEffect(() => {
-    // Function to fetch cart data using Axios
     const fetchCart = async () => {
       try {
         const response = await axios.get<CartData>(
           "http://localhost:3000/api/cart",
           {
-            withCredentials: true, // send cookies
+            withCredentials: true,
           }
         );
-        // Ensure response data has cart property
         const data = response.data;
         // console.log(data);
         if (data && data.cart) {
@@ -100,7 +96,7 @@ const CartPage = () => {
     try {
       await axios.delete("http://localhost:3000/api/cart", {
         withCredentials: true,
-        data: { productId }, // send cookies
+        data: { productId },
       });
       setCartItems(cartItems.filter((item) => item.productId !== productId));
     } catch (err: any) {
@@ -144,7 +140,6 @@ const CartPage = () => {
           <div className="flex flex-col md:flex-row gap-4">
             <div className="md:w-2/3">
               {" "}
-              {/* Items Section */}
               <table className="table-auto w-full -collapse">
                 <thead>
                   <tr>
@@ -173,7 +168,7 @@ const CartPage = () => {
                             type="text"
                             value={item.quantity}
                             className="w-12 text-center border rounded"
-                            readOnly // Or make it editable
+                            readOnly
                           />
                         </div>
                       </td>
@@ -198,7 +193,6 @@ const CartPage = () => {
 
             <div className="md:w-1/3">
               {" "}
-              {/* Summary Section */}
               <div className="border p-4">
                 <h2 className="text-lg font-bold mb-2">Summary</h2>
                 <div className="flex justify-between mb-2">
