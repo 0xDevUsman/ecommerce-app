@@ -1,7 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
 
-
-
 interface BodyData {
     name : string;
     price : number;
