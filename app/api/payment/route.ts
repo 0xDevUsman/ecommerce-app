@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { NextResponse, type NextRequest } from "next/server";
 
 interface BodyData {
