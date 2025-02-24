@@ -9,7 +9,7 @@ import deleteIcon from "../../public/assets/icons/delete.svg";
 import Link from "next/link";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
-import {loadStripe} from "@stripe/stripe-js"
+import { loadStripe } from "@stripe/stripe-js";
 interface CartItem {
   productId: string;
   name: string;
@@ -105,26 +105,22 @@ const CartPage = () => {
     }
   };
 
-  const makePayment = async ()=>{
-    const stripeKey = process.env.STRIPE_PUBLISHED_KEY;
-    if (!stripeKey) {
-      console.error("Stripe publishable key is not defined");
-      return;
-    }
-    const stripe = await loadStripe(stripeKey);
-
-    const body = {
-      products : cartItems
-    }
-    const headers  = {
-      "Content-Type": "application/json"
-    }
-    const response = await axios.post('http://localhost:3000/api/payment', body , {headers});
-    const session = response.data;
-    const result = stripe?.redirectToCheckout({
-      sessionId: session.id,
-    })
+  interface Product {
+    name: string;
+    amount: number;
   }
+  const orderPlaced = async ()=>{
+
+  }
+  const makePayment = async ({ amount, name }: Product) => {
+    const response = await axios.post("/api/payment", {
+      amount: amount,
+      name: name,
+    });
+    console.log(response.data?.message?.url);
+    window.location.href = response.data?.message?.url;
+    orderPlaced();
+  };
 
   if (loading) return <p>Loading cart...</p>;
   if (error) return <p>{error}</p>;
@@ -208,7 +204,15 @@ const CartPage = () => {
                   <span>Grand Total:</span>
                   <span>${grandTotal.toFixed(2)}</span>
                 </div>
-                <button onClick={makePayment} className="bg-black hover:opacity-85 text-white font-bold py-2 px-4 rounded mt-4 w-full">
+                <button
+                  onClick={() =>
+                    makePayment({
+                      amount: Number(grandTotal.toFixed(2)),
+                      name: cartItems.map((item) => item.name).join(", "),
+                    })
+                  }
+                  className="bg-black hover:opacity-85 text-white font-bold py-2 px-4 rounded mt-4 w-full"
+                >
                   {user ? "Checkout" : "Login to checkout"}
                 </button>
               </div>
