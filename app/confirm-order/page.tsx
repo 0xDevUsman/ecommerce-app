@@ -1,10 +1,28 @@
-import React from "react";
+"use client";
+
+import React, { useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Support from "../components/Support";
 import Footer from "../components/Footer";
 import Link from "next/link";
+import axios from "axios";
 
-const page = () => {
+const Page = () => {
+  useEffect(() => {
+    const clearUserCart = async () => {
+      try {
+        const { data } = await axios.delete(
+          "http://localhost:3000/api/cart/clear"
+        );
+        console.log("Cart cleared:", data.message);
+      } catch (error) {
+        console.error("Error clearing cart:", error);
+      }
+    };
+
+    clearUserCart();
+  }, []);
+
   return (
     <>
       <Navbar />
@@ -27,10 +45,10 @@ const page = () => {
         </div>
       </div>
       <Support />
-      
+
       <Footer />
     </>
   );
 };
 
-export default page;
+export default Page;
