@@ -5,6 +5,7 @@ import Image from "next/image";
 import Footer from "../components/Footer";
 import axios from "axios";
 import Link from "next/link";
+
 interface Product {
   _id: string | number;
   name: string;
@@ -15,13 +16,14 @@ interface Product {
 
 const Products = () => {
   const [product, setProduct] = useState<Product[]>([]);
+
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get("http://localhost:3000/api/products");
         if (response.status === 200) {
           setProduct(response.data);
-          console.log(response.data)
+          console.log(response.data);
         }
       } catch (error) {
         console.log(error);
@@ -33,10 +35,10 @@ const Products = () => {
   return (
     <>
       <Navbar />
-      <section className="flex justify-center p-6 mt-10">
-        <main className="w-[90%] flex gap-6">
+      <section className="p-6 mt-10">
+        <main className="w-[90%] mx-auto flex flex-col lg:flex-row gap-6">
           {/* Sidebar */}
-          <aside className="w-1/4 p-4 bg-gray-100 rounded-lg">
+          <aside className="w-full lg:w-1/4 p-4 bg-gray-100 rounded-lg">
             <h1 className="text-xl font-bold mb-4">Product Categories</h1>
             <div className="space-y-2">
               {[
@@ -60,36 +62,38 @@ const Products = () => {
             </div>
 
             <h2 className="text-lg font-bold mt-6">Sort By</h2>
-            <div className="mt-2">
+            <div className="mt-2 space-y-2">
               <div className="flex items-center space-x-2">
                 <input type="radio" name="sort" className="h-4 w-4" />
-                <label>low to high</label>
+                <label>Low to High</label>
               </div>
               <div className="flex items-center space-x-2">
                 <input type="radio" name="sort" className="h-4 w-4" />
-                <label>high to low</label>
+                <label>High to Low</label>
               </div>
             </div>
           </aside>
 
           {/* Product Grid */}
-          <section className="w-[90%] flex flex-wrap justify-between gap-6">
+          <section className="w-full lg:w-3/4 flex flex-wrap justify-center lg:justify-start gap-6">
             {product.map((data, index) => (
               <Link
                 href={`/products/${data._id}`}
                 key={index}
-                className="border w-[300px] p-4 rounded-lg flex items-center flex-col bg-white shadow-md transition-transform duration-300 transform hover:scale-105 cursor-pointer"
+                className="border w-[300px] p-4 rounded-lg flex flex-col bg-white shadow-md transition-transform duration-300 transform hover:scale-105 cursor-pointer"
               >
                 <Image
                   className="rounded-t-lg object-cover"
                   width={250}
                   height={250}
                   src={data.image}
-                  alt=""
+                  alt={data.name}
                 />
-                <div>
+                <div className="mt-4">
                   <h3 className="font-semibold text-lg">{data.name}</h3>
-                  <p className="text-gray-600 text-sm">{data.description}</p>
+                  <p className="text-gray-600 text-sm line-clamp-2">
+                    {data.description}
+                  </p>
                   <p className="text-lg font-bold mt-2">${data.price}.00</p>
                 </div>
               </Link>

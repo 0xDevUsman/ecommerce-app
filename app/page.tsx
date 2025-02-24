@@ -7,21 +7,22 @@ import Footer from "./components/Footer";
 import Link from "next/link";
 import Support from "./components/Support";
 import Collection from "./components/Collection";
-// import { Collection } from "mongoose";
 
 const page = () => {
   return (
     <>
       <Navbar />
       <div className="flex justify-center">
-        <section>
-          <main className="mx-auto w-[90%] mt-6 mb-10 relative bg-white">
+        <section className="w-full">
+          {/* Hero Section */}
+          <main className="relative mx-auto w-[90%] mt-6 mb-10 bg-white">
             <Image
               src={hero}
               alt="Description of image"
               className="min-w-screen"
+              layout="responsive"
             />
-            <div className="absolute top-[40%] left-[30%] transform -translate-x-1/2 -translate-y-1/2  px-4">
+            <div className="absolute top-[40%] left-[30%] transform -translate-x-1/2 -translate-y-1/2 px-4 text-center">
               <h1 className="text-4xl md:text-6xl text-black font-bold">
                 Unleash Innovation <br /> in Every Byte.
               </h1>
@@ -30,24 +31,24 @@ const page = () => {
               </h1>
               <Link
                 href={"/products"}
-                className="bg-black hover:opacity-85 text-white font-bold py-3 px-6 rounded-lg mt-8"
+                className="bg-black hover:opacity-85 text-white font-bold py-3 px-6 rounded-lg mt-8 inline-block"
               >
                 Shop now
               </Link>
             </div>
           </main>
-          <main>
+          {/* Collections */}
+          <main className="mx-auto w-[90%] mt-6 mb-10">
             <h1 className="text-3xl font-semibold text-center pb-6">
               New Collections
             </h1>
             <div className="flex flex-wrap justify-center gap-4 p-4">
-              {/* Replace this with the correct component or remove it */}
-              {/* <Collection/> */}
-              <Collection/>
+              <Collection />
             </div>
           </main>
+          {/* Deals Section */}
           <main className="mx-auto w-[90%] mt-6 mb-10">
-            <div className="flex justify-center items-center gap-4 p-4">
+            <div className="flex flex-col md:flex-row justify-center items-center gap-4 p-4">
               <div className="w-full md:w-1/2">
                 <h1 className="text-4xl font-bold pb-6">Deals of the Months</h1>
                 <p className="text-lg font-medium pb-10">
@@ -60,18 +61,19 @@ const page = () => {
                 </p>
                 <Link
                   href={"/products"}
-                  className="bg-black hover:opacity-85 text-white font-bold py-3 px-6 rounded-lg mt-8  "
+                  className="bg-black hover:opacity-85 text-white font-bold py-3 px-6 rounded-lg mt-8 inline-block"
                 >
                   View Products
                 </Link>
               </div>
               <div className="w-full md:w-1/2">
-                <Image src={deals} alt="" />
+                <Image src={deals} alt="" layout="responsive" />
               </div>
             </div>
           </main>
-          <main>
-            <Support/>
+          {/* Support Section */}
+          <main className="mx-auto w-[90%] mt-6 mb-10">
+            <Support />
           </main>
         </section>
       </div>

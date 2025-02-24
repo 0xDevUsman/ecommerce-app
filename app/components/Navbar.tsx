@@ -36,38 +36,41 @@ const Navbar = () => {
 
   return (
     <div>
-      <nav className="flex justify-between items-center px-6 md:px-20 pt-6 pb-2">
-        <Link className="text-lg" href={"/"}>
-          <Image width={200} src={logo} alt="logo" />
+      <nav className="flex flex-col md:flex-row justify-between items-center px-6 md:px-20 pt-6 pb-2">
+        <Link href={"/"}>
+          <div className="flex-shrink-0">
+            <Image width={200} src={logo} alt="logo" />
+          </div>
         </Link>
-        <div className="flex gap-10 items-center font-bold text-sm md:text-lg">
-          <Link className="text-lg" href={"/"}>
-            Home
+        <div className="flex flex-wrap gap-4 md:gap-10 items-center font-bold text-sm md:text-lg mt-4 md:mt-0">
+          <Link href={"/"}>
+            <div className="hover:opacity-90">Home</div>
           </Link>
-          <Link className="text-lg" href={"/products"}>
-            Shop
+          <Link href={"/products"}>
+            <div className="hover:opacity-90">Shop</div>
           </Link>
           {user ? (
             <>
               <Link href={"/cart"}>
-                <Image src={cart} alt="Cart" />
+                <div className="hover:opacity-90">
+                  <Image src={cart} alt="Cart" />
+                </div>
               </Link>
             </>
-          ) : (
-            ""
-          )}
+          ) : null}
           {user ? (
             <>
               <Link href={"/profile"}>
-                <Image height={30} width={30} src={profile} alt="Profile" />
+                <div className="hover:opacity-90">
+                  <Image height={30} width={30} src={profile} alt="Profile" />
+                </div>
               </Link>
             </>
           ) : (
-            <Link
-              className="text-lg px-6 flex items-center py-2 bg-black text-white text-center rounded-lg font-bold hover:opacity-85"
-              href={"/login"}
-            >
-              Login
+            <Link href={"/login"}>
+              <div className="px-6 flex items-center py-2 bg-black text-white rounded-lg font-bold hover:opacity-90">
+                Login
+              </div>
             </Link>
           )}
         </div>

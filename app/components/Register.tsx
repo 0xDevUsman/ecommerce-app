@@ -5,8 +5,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { toast } from "react-toastify";
 import axios from "axios";
-import registerImage from '../../public/assets/image /image-2.svg'
-import logo from '../../public/logo-black.svg'
+import registerImage from "../../public/assets/images/image-2.svg";
+import logo from "../../public/logo-black.svg";
+
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -27,8 +28,8 @@ const Register = () => {
         password,
       });
       console.log(data.message);
-      window.location.href = "/login";
       toast.success(data.message);
+      window.location.href = "/login";
     } catch (error) {
       if (axios.isAxiosError(error)) {
         console.log(error.response?.data.message);
@@ -53,9 +54,10 @@ const Register = () => {
         />
       </div>
 
-      <div className="absolute top-5 left-5 bg-opacity-50 px-4 py-2 rounded-lg">
+      {/* Logo overlay */}
+      <div className="absolute top-5 left-5 bg-opacity-50 px-3 md:px-4 py-2 rounded-lg">
         <div className="flex items-end justify-center gap-1">
-          <Image width={250} src={logo} alt="logo"/>
+          <Image width={250} src={logo} alt="logo" />
         </div>
       </div>
 
@@ -69,7 +71,7 @@ const Register = () => {
             Please enter details
           </p>
           <form onSubmit={submitHandler}>
-            <label className="text-sm">
+            <label className="text-sm block">
               Full Name <span className="text-red-500">*</span>
             </label>
             <input
@@ -78,7 +80,7 @@ const Register = () => {
               value={name}
               className="w-full p-2 md:p-3 mb-2 border border-gray-400 rounded-lg outline-none"
             />
-            <label className="text-sm">
+            <label className="text-sm block">
               Email <span className="text-red-500">*</span>
             </label>
             <input
@@ -87,7 +89,7 @@ const Register = () => {
               value={email}
               className="w-full p-2 md:p-3 mb-2 border border-gray-400 rounded-lg outline-none"
             />
-            <label className="text-sm">
+            <label className="text-sm block">
               Password <span className="text-red-500">*</span>
             </label>
             <input
@@ -96,7 +98,7 @@ const Register = () => {
               value={password}
               className="w-full p-2 md:p-3 mb-2 border border-gray-400 rounded-lg outline-none"
             />
-            <label className="text-sm">
+            <label className="text-sm block">
               Confirm Password <span className="text-red-500">*</span>
             </label>
             <input
@@ -107,14 +109,16 @@ const Register = () => {
             />
             <button
               type="submit"
-              className="w-full p-3 text-lg text-white font-bold bg-black rounded-lg hover:opacity-85"
+              className="w-full p-3 text-lg text-white font-bold bg-black rounded-lg hover:opacity-90 transition duration-200"
             >
               Register
             </button>
             <p className="text-start text-sm md:text-lg mt-3">
               Already have an account?{" "}
-              <Link href="/login" className="text-black font-bold">
-                Login
+              <Link href="/login">
+                <span className="text-black font-bold cursor-pointer">
+                  Login
+                </span>
               </Link>
             </p>
           </form>

@@ -10,6 +10,7 @@ import Link from "next/link";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import { loadStripe } from "@stripe/stripe-js";
+
 interface CartItem {
   productId: string;
   name: string;
@@ -75,7 +76,6 @@ const CartPage = () => {
           }
         );
         const data = response.data;
-        // console.log(data);
         if (data && data.cart) {
           setCartItems(data.cart);
         } else {
@@ -109,9 +109,10 @@ const CartPage = () => {
     name: string;
     amount: number;
   }
-  const orderPlaced = async ()=>{
+  const orderPlaced = async () => {
+    // Order placed logic here
+  };
 
-  }
   const makePayment = async ({ amount, name }: Product) => {
     const response = await axios.post("/api/payment", {
       amount: amount,
@@ -122,8 +123,8 @@ const CartPage = () => {
     orderPlaced();
   };
 
-  if (loading) return <p>Loading cart...</p>;
-  if (error) return <p>{error}</p>;
+  if (loading) return <p className="text-center mt-10">Loading cart...</p>;
+  if (error) return <p className="text-center mt-10 text-red-500">{error}</p>;
 
   return (
     <>
@@ -133,28 +134,28 @@ const CartPage = () => {
         {!cartItems || cartItems.length === 0 ? (
           <p>Your cart is empty</p>
         ) : (
-          <div className="flex flex-col md:flex-row gap-4">
-            <div className="md:w-2/3">
-              {" "}
-              <table className="table-auto w-full -collapse">
+          <div className="flex flex-col lg:flex-row gap-4">
+            {/* Cart Items Table */}
+            <div className="lg:w-2/3 overflow-x-auto">
+              <table className="min-w-full border-collapse">
                 <thead>
                   <tr>
-                    <th className="border px-4 py-2">Product</th>
-                    <th className="border px-4 py-2">Quantity</th>
-                    <th className="border px-4 py-2">Subtotal</th>
+                    <th className="border px-4 py-2 text-left">Product</th>
+                    <th className="border px-4 py-2 text-center">Quantity</th>
+                    <th className="border px-4 py-2 text-right">Subtotal</th>
                     <th className="border px-4 py-2"></th>
                   </tr>
                 </thead>
                 <tbody>
                   {cartItems.map((item, index) => (
                     <tr key={index}>
-                      <td className="border px-4 py-2">
+                      <td className="border px-4 py-2 flex items-center gap-2">
                         <Image
                           src={item.image || ""}
                           alt={item.name}
                           width={64}
                           height={64}
-                          className="w-16 h-16 mr-2"
+                          className="w-16 h-16"
                         />
                         <span>{item.name}</span>
                       </td>
@@ -171,13 +172,16 @@ const CartPage = () => {
                       <td className="border px-4 py-2 text-right">
                         ${(item.price * item.quantity).toFixed(2)}
                       </td>
-                      <td className="border px-4 py-2 text-center w-20">
-                        <div className="flex justify-center">
+                      <td className="border px-4 py-2 text-center">
+                        <div
+                          className="flex justify-center cursor-pointer"
+                          onClick={() => handleDeleteItem(item.productId)}
+                        >
                           <Image
-                            onClick={() => handleDeleteItem(item.productId)}
                             src={deleteIcon}
-                            className="cursor-pointer text-center"
                             alt="Delete Icon"
+                            width={24}
+                            height={24}
                           />
                         </div>
                       </td>
@@ -187,9 +191,9 @@ const CartPage = () => {
               </table>
             </div>
 
-            <div className="md:w-1/3">
-              {" "}
-              <div className="border p-4">
+            {/* Summary Section */}
+            <div className="lg:w-1/3">
+              <div className="border p-4 rounded-lg">
                 <h2 className="text-lg font-bold mb-2">Summary</h2>
                 <div className="flex justify-between mb-2">
                   <span>Subtotal:</span>
@@ -211,7 +215,7 @@ const CartPage = () => {
                       name: cartItems.map((item) => item.name).join(", "),
                     })
                   }
-                  className="bg-black hover:opacity-85 text-white font-bold py-2 px-4 rounded mt-4 w-full"
+                  className="bg-black hover:opacity-90 text-white font-bold py-2 px-4 rounded mt-4 w-full transition duration-200"
                 >
                   {user ? "Checkout" : "Login to checkout"}
                 </button>
@@ -220,21 +224,23 @@ const CartPage = () => {
           </div>
         )}
 
-        <div className="fixed bottom-10 left-0 w-full flex items-end justify-center mt-8">
-          <div className="mt-8 bg-gray-200 rounded-lg">
-            <div className="flex justify-between items-center gap-4 px-10 py-6">
+        {/* Continue Shopping Banner */}
+        <div className="fixed bottom-10 left-0 w-full flex justify-center">
+          <div className="mt-8 bg-gray-200 rounded-lg w-full max-w-4xl mx-4">
+            <div className="flex flex-col sm:flex-row justify-between items-center gap-4 px-6 py-6">
               <div>
-                <h2 className="text-3xl font-bold mb-2">Continue shopping</h2>
+                <h2 className="text-2xl font-bold mb-2">
+                  Continue shopping
+                </h2>
                 <p className="text-gray-700">
                   Discover more products that are perfect for gift, for your
                   wardrobe, or a unique addition to your collection.
                 </p>
               </div>
-              <Link
-                href={"/products"}
-                className="bg-black hover:opacity-85 text-white flex items-center font-bold h-12 px-4 py-1 rounded-lg"
-              >
-                Continue shopping
+              <Link href="/products">
+                <div className="bg-black hover:opacity-90 text-white flex items-center font-bold h-12 px-4 py-1 rounded-lg transition duration-200">
+                  Continue shopping
+                </div>
               </Link>
             </div>
           </div>

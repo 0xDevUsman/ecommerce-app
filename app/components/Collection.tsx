@@ -9,7 +9,7 @@ interface Product {
   name: string;
   description: string;
   price: number;
-  image : string;
+  image: string;
 }
 
 const Collection = () => {
@@ -30,13 +30,15 @@ const Collection = () => {
   }, []);
 
   return (
-    <>
+    <div className="flex flex-wrap gap-4 justify-center items-center px-4">
       {product.slice(0, 4).map((data) => (
         <Link key={data._id} href={`/products/${data._id}`}>
-          <Cards name={data.name} price={data.price} image={data.image } />
+          <div className="flex justify-center">
+            <Cards name={data.name} price={data.price} image={data.image} />
+          </div>
         </Link>
       ))}
-    </>
+    </div>
   );
 };
 

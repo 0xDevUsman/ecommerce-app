@@ -6,7 +6,7 @@ interface Product {
   name: string;
   description: string;
   price: number;
-  image : string;
+  image: string;
   category: string;
 }
 
@@ -16,7 +16,6 @@ interface PageProps {
 
 // This page component is a server component.
 export default async function Page({ params }: PageProps) {
-  // No need to "await" params if it's an object, but if Next.js recommends it, it's fine.
   const { id } = params; 
   let product: Product | null = null;
 
