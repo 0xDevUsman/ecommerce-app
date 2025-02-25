@@ -109,9 +109,6 @@ const CartPage = () => {
     name: string;
     amount: number;
   }
-  const orderPlaced = async () => {
-    // Order placed logic here
-  };
 
   const makePayment = async ({ amount, name }: Product) => {
     const response = await axios.post("/api/payment", {
@@ -120,7 +117,6 @@ const CartPage = () => {
     });
     console.log(response.data?.message?.url);
     window.location.href = response.data?.message?.url;
-    orderPlaced();
   };
 
   if (loading) return <p className="text-center mt-10">Loading cart...</p>;

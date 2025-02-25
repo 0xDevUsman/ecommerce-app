@@ -9,6 +9,20 @@ import axios from "axios";
 
 const Page = () => {
   useEffect(() => {
+    const placeOrder = async () => {
+      try {
+        const { data } = await axios.post(
+          "http://localhost:3000/api/orders",
+          {}, // Empty body
+          { withCredentials: true }
+        );
+        console.log("Order placed:", data.order);
+      } catch (error) {
+        console.error("Error placing order:", error);
+      }
+    };
+    placeOrder();
+
     const clearUserCart = async () => {
       try {
         const { data } = await axios.delete(
@@ -35,9 +49,11 @@ const Page = () => {
           shortly.
         </p>
         <div className="flex flex-col sm:flex-row justify-center gap-4 w-full mt-8">
-          <button className="border border-black text-black px-6 py-3 rounded-lg hover:bg-black hover:text-white transition-all duration-200">
-            View all orders
-          </button>
+          <Link href={"/my-orders"}>
+            <button className="border border-black text-black px-6 py-3 rounded-lg hover:bg-black hover:text-white transition-all duration-200">
+              View all orders
+            </button>
+          </Link>
           <Link href="/">
             <div>
               <button className="bg-black text-white px-6 py-3 rounded-lg hover:opacity-90 transition-all duration-200">

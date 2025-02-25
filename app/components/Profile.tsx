@@ -76,7 +76,7 @@ const Profile = () => {
                 <p className="text-sm">{user?.email}</p>
               </div>
             </div>
-            <Link href={"/"} passHref>
+            <Link href={"/my-orders"} passHref>
               <div className="flex gap-4 p-4 bg-gray-100 rounded-lg hover:bg-gray-300 transition-colors duration-150">
                 <Image width={30} height={30} src={order} alt="Orders" />
                 <span className="font-medium">My Orders</span>

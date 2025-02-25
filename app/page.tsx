@@ -72,7 +72,7 @@ const page = () => {
             </div>
           </main>
           {/* Support Section */}
-          <main className="mx-auto w-[90%] mt-6 mb-10">
+          <main className="mx-auto min-w-full mt-6 mb-10">
             <Support />
           </main>
         </section>

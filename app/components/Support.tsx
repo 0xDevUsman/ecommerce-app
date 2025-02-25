@@ -8,8 +8,8 @@ import payment from "../../public/assets/icons/payment.svg";
 const Support = () => {
   return (
     <div className="flex justify-center items-center p-4">
-      <div className="flex flex-wrap justify-center gap-8 p-8 w-full max-w-6xl">
-        <div className="flex flex-col items-start w-full sm:w-[300px] bg-white p-6 rounded-lg hover:scale-105 transform transition-all duration-300">
+      <div className="flex flex-wrap justify-center gap-8 p-8 w-full max-w-screen">
+        <div className="flex flex-col items-start w-full sm:w-[300px]  bg-white p-6 rounded-lg hover:scale-105 transform transition-all duration-300">
           <Image
             src={shipping}
             alt="Free Shipping"
