@@ -16,7 +16,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 
   try {
     // Assuming your API endpoint is defined under /api/products
-    const res = await axios.get(`http://localhost:3000/api/products/${id}`);
+    const res = await axios.get(`/api/products/${id}`);
     product = res.data;
   } catch (error) {
     console.error("Error fetching product:", error);

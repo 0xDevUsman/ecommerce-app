@@ -27,7 +27,7 @@ const MyOrders = () => {
   useEffect(() => {
     const getOrder = async () => {
       try {
-        const { data } = await axios.get("http://localhost:3000/api/orders", {
+        const { data } = await axios.get("/api/orders", {
           withCredentials: true,
         });
         console.log("Orders fetched:", data.orders);

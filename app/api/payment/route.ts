@@ -8,8 +8,8 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     const session = await stripe.checkout.sessions.create({
-      success_url: "http://localhost:3000/confirm-order",
-      cancel_url: "http://localhost:3000/",
+      success_url: "/confirm-order",
+      cancel_url: "/",
       line_items: [
         {
           price_data: {

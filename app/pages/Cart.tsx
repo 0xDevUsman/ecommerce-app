@@ -70,7 +70,7 @@ const CartPage = () => {
     const fetchCart = async () => {
       try {
         const response = await axios.get<CartData>(
-          "http://localhost:3000/api/cart",
+          "/api/cart",
           {
             withCredentials: true,
           }
@@ -94,7 +94,7 @@ const CartPage = () => {
 
   const handleDeleteItem = async (productId: string) => {
     try {
-      await axios.delete("http://localhost:3000/api/cart", {
+      await axios.delete("/api/cart", {
         withCredentials: true,
         data: { productId },
       });
