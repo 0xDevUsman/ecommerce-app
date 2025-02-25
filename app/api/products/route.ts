@@ -2,7 +2,7 @@ import { connectDB } from "@/app/lib/mongo";
 import Products from "@/app/models/products";
 import { NextResponse, type NextRequest } from "next/server";
 import jwt from 'jsonwebtoken'
-export const GET = async () => {
+export async function GET(){
   try {
     await connectDB();
     const products = await Products.find({});

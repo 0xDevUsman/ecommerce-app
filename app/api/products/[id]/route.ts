@@ -3,10 +3,10 @@ import Products from "@/app/models/products";
 import { NextRequest, NextResponse } from "next/server";
 import mongoose from "mongoose";
 
-export const GET = async (
+export async function GET(
   req: NextRequest,
   { params }: { params: { id: string } }
-) => {
+) {
   try {
     const { id } = params;
 
@@ -38,4 +38,4 @@ export const GET = async (
       { status: 500 }
     );
   }
-};
+}
