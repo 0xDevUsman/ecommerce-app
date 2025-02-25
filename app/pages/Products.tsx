@@ -12,10 +12,13 @@ interface Product {
   description: string;
   price: number;
   image: string;
+  category: string;
 }
 
 const Products = () => {
   const [product, setProduct] = useState<Product[]>([]);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [sortOrder, setSortOrder] = useState<string>("");
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -31,6 +34,31 @@ const Products = () => {
     };
     fetchProducts();
   }, []);
+
+  // Handle category selection
+  const handleCategoryChange = (category: string) => {
+    setSelectedCategories((prev) =>
+      prev.includes(category)
+        ? prev.filter((c) => c !== category)
+        : [...prev, category]
+    );
+  };
+
+  // Handle sorting selection
+  const handleSortChange = (order: string) => {
+    setSortOrder(order);
+  };
+
+  // Apply filtering & sorting
+  const filteredProducts = product
+    .filter((p) =>
+      selectedCategories.length > 0 ? selectedCategories.includes(p.category) : true
+    )
+    .sort((a, b) => {
+      if (sortOrder === "low-to-high") return a.price - b.price;
+      if (sortOrder === "high-to-low") return b.price - a.price;
+      return 0;
+    });
 
   return (
     <>
@@ -55,7 +83,12 @@ const Products = () => {
                 "Photography",
               ].map((category) => (
                 <div key={category} className="flex items-center">
-                  <input type="checkbox" className="h-4 w-4" />
+                  <input
+                    type="checkbox"
+                    className="h-4 w-4"
+                    checked={selectedCategories.includes(category)}
+                    onChange={() => handleCategoryChange(category)}
+                  />
                   <label className="px-2">{category}</label>
                 </div>
               ))}
@@ -64,11 +97,23 @@ const Products = () => {
             <h2 className="text-lg font-bold mt-6">Sort By</h2>
             <div className="mt-2 space-y-2">
               <div className="flex items-center space-x-2">
-                <input type="radio" name="sort" className="h-4 w-4" />
+                <input
+                  type="radio"
+                  name="sort"
+                  className="h-4 w-4"
+                  checked={sortOrder === "low-to-high"}
+                  onChange={() => handleSortChange("low-to-high")}
+                />
                 <label>Low to High</label>
               </div>
               <div className="flex items-center space-x-2">
-                <input type="radio" name="sort" className="h-4 w-4" />
+                <input
+                  type="radio"
+                  name="sort"
+                  className="h-4 w-4"
+                  checked={sortOrder === "high-to-low"}
+                  onChange={() => handleSortChange("high-to-low")}
+                />
                 <label>High to Low</label>
               </div>
             </div>
@@ -76,7 +121,7 @@ const Products = () => {
 
           {/* Product Grid */}
           <section className="w-full lg:w-3/4 flex flex-wrap justify-center lg:justify-start gap-6">
-            {product.map((data, index) => (
+            {filteredProducts.map((data, index) => (
               <Link
                 href={`/products/${data._id}`}
                 key={index}
