@@ -5,10 +5,10 @@ import mongoose from "mongoose";
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: { id: string } }
 ) {
   try {
-    const { id } = params;
+    const { id } = context.params; // Use context.params instead of destructuring as a second argument
 
     // Connect to the database
     await connectDB();
