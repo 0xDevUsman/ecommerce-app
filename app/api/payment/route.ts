@@ -7,7 +7,6 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    console.log(body);
     const session = await stripe.checkout.sessions.create({
       success_url: "http://localhost:3000/confirm-order",
       cancel_url: "http://localhost:3000/",

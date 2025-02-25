@@ -26,7 +26,6 @@ const Products = () => {
         const response = await axios.get("http://localhost:3000/api/products");
         if (response.status === 200) {
           setProduct(response.data);
-          console.log(response.data);
         }
       } catch (error) {
         console.log(error);

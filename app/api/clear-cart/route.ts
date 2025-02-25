@@ -34,9 +34,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Delete all cart items for the given user.
-    const deleteResult = await Cart.deleteMany({ userId });
-    console.log("Delete result:", deleteResult);
-    console.log(`Cart cleared for user ${userId}`);
+     await Cart.deleteMany({ userId });
     
     return NextResponse.json({ message: "Cart cleared" }, { status: 200 });
   } catch (error) {

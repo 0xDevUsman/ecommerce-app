@@ -27,7 +27,6 @@ const Register = () => {
         email,
         password,
       });
-      console.log(data.message);
       toast.success(data.message);
       window.location.href = "/login";
     } catch (error) {
