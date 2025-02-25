@@ -38,7 +38,7 @@ const page = () => {
             </div>
           </main>
           {/* Collections */}
-          <main className="mx-auto w-[90%] mt-6 mb-10">
+          <main className="mx-auto w-full mt-6 mb-10">
             <h1 className="text-3xl font-semibold text-center pb-6">
               New Collections
             </h1>
