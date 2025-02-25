@@ -100,5 +100,4 @@ This project is licensed under the **MIT License**.
 ## 📬 Contact
 
 For any queries or suggestions, reach out to me:  
-📧 Email: your-email@example.com  
 🐙 GitHub: [0xDevUsman](https://github.com/0xDevUsman)  
