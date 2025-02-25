@@ -1,12 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { connectDB } from "@/app/lib/mongo";
 import Products from "@/app/models/products";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import mongoose from "mongoose";
 
-export async function GET(req: NextRequest, context: any): Promise<NextResponse> {
+export async function GET(
+  req: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
   try {
-    const { id } = context.params;
+    const id = (await params).id;
 
     await connectDB();
 
