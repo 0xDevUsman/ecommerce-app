@@ -63,11 +63,15 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
           { withCredentials: true } // Ensure cookies are sent
         );
         if (res.status === 200) {
-          toast.success("Product added to cart successfully!")
+          toast.success("Product added to cart successfully!");
         }
       } else {
         toast.error("Please login to add products to cart.");
-        window.location.href = "/login";
+        {
+          setTimeout(() => {
+            window.location.href = "/login";
+          }, 3000);
+        }
       }
     } catch (error: unknown) {
       console.error("Add to cart error:", error);
