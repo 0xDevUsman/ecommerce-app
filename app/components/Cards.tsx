@@ -7,7 +7,7 @@ interface CardProps {
 }
 
 const Cards = ({ name, price, image }: CardProps) => (
-  <div className="bg-white h-auto shadow-md p-4 max-w-xs md:max-w-sm lg:max-w-md rounded-lg group cursor-pointer transition-transform duration-300 transform hover:scale-105 flex flex-col">
+  <div className="bg-white h-[400px] shadow-md p-4 max-w-xs sm:w-80 rounded-lg group cursor-pointer transition-transform duration-300 transform hover:scale-105 flex flex-col">
     <div className="w-full h-48 md:h-56 lg:h-64">
       <Image
         className="w-full h-full rounded-t-lg object-cover"

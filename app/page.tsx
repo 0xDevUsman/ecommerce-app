@@ -22,8 +22,8 @@ const page = () => {
               className="min-w-screen"
               layout="responsive"
             />
-            <div className="absolute top-[40%] left-[30%] transform -translate-x-1/2 -translate-y-1/2 px-4 text-center">
-              <h1 className="text-4xl md:text-6xl text-black font-bold">
+            <div className="hidden sm:block absolute top-[40%] left-[30%] transform -translate-x-1/2 -translate-y-1/2 px-4 text-center">
+              <h1 className="text-2xl md:text-6xl text-black font-bold">
                 Unleash Innovation <br /> in Every Byte.
               </h1>
               <h1 className="text-lg mt-2 mb-7">
