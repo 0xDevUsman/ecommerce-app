@@ -8,8 +8,7 @@ export const GET = async (
   { params }: { params: { id: string } }
 ) => {
   try {
-    // Await the params to satisfy Next.js async API requirement
-    const { id } = await Promise.resolve(params);
+    const { id } = params;
 
     // Connect to the database
     await connectDB();
