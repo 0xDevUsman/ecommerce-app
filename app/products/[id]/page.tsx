@@ -10,12 +10,6 @@ interface Product {
   category: string;
 }
 
-// Change PageProps so that params is a plain object.
-// interface PageProps {
-//   params: { id: string };
-// }
-
-// This page component is a server component.
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
   const  id  = (await params).id;
   let product: Product | null = null;
