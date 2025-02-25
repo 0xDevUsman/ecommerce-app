@@ -1,19 +1,16 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { connectDB } from "@/app/lib/mongo";
 import Products from "@/app/models/products";
 import { NextRequest, NextResponse } from "next/server";
 import mongoose from "mongoose";
 
-export async function GET(
-  req: NextRequest,
-  context: { params: { id: string } }
-) {
+export async function GET(req: NextRequest, context: any) {
   try {
-    const { id } = context.params; // Use context.params instead of destructuring as a second argument
+    const { id } = context.params;
 
     // Connect to the database
     await connectDB();
 
-    // Validate if the provided ID is a valid MongoDB ObjectId
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return NextResponse.json(
         { message: "Invalid product ID" },
@@ -21,7 +18,6 @@ export async function GET(
       );
     }
 
-    // Find product by ID
     const product = await Products.findById(id);
     if (!product) {
       return NextResponse.json(
@@ -30,7 +26,6 @@ export async function GET(
       );
     }
 
-    // Return the product data
     return NextResponse.json(product, { status: 200 });
   } catch (error) {
     return NextResponse.json(
