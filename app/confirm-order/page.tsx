@@ -32,7 +32,7 @@ const Page = () => {
         </h1>
         <p className="text-gray-600 font-bold text-base sm:text-lg text-center max-w-2xl">
           Your order has been confirmed. You will receive an email confirmation
-          shortly. Your Id is jhbvd64v6s46vs.
+          shortly.
         </p>
         <div className="flex flex-col sm:flex-row justify-center gap-4 w-full mt-8">
           <button className="border border-black text-black px-6 py-3 rounded-lg hover:bg-black hover:text-white transition-all duration-200">

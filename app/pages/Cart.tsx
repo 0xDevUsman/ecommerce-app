@@ -238,7 +238,7 @@ const CartPage = () => {
                 </p>
               </div>
               <Link href="/products">
-                <div className="bg-black hover:opacity-90 text-white flex items-center font-bold h-12 px-4 py-1 rounded-lg transition duration-200">
+                <div className="bg-black hover:opacity-90 text-white flex items-center font-bold h-12 w-52 text-center justify-center px-4 py-1 rounded-lg transition duration-200">
                   Continue shopping
                 </div>
               </Link>
