@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { GetServerSideProps } from "next";
 import { jwtDecode } from "jwt-decode";
+import { toast } from "react-toastify";
 
 interface Product {
   _id: string;
@@ -62,10 +63,10 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
           { withCredentials: true } // Ensure cookies are sent
         );
         if (res.status === 200) {
-          alert("Product added to cart successfully!");
+          toast.success("Product added to cart successfully!")
         }
       } else {
-        alert("Please login to add products to the cart.");
+        toast.error("Please login to add products to cart.");
         window.location.href = "/login";
       }
     } catch (error: unknown) {
