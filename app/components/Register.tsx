@@ -22,7 +22,7 @@ const Register = () => {
     }
 
     try {
-      const { data } = await axios.post("/api/auth/register", {
+      const { data } = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/auth/register`, {
         name,
         email,
         password,

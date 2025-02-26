@@ -12,7 +12,7 @@ const Page = () => {
     const placeOrder = async () => {
       try {
         const { data } = await axios.post(
-          "/api/orders",
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/orders`,
           {}, // Empty body
           { withCredentials: true }
         );
@@ -26,7 +26,7 @@ const Page = () => {
     const clearUserCart = async () => {
       try {
         const { data } = await axios.delete(
-          "/api/cart/clear"
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart/clear`
         );
         console.log("Cart cleared:", data.message);
       } catch (error) {

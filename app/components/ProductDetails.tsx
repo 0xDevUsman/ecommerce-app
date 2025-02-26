@@ -58,7 +58,7 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
       // Assuming quantity is 1 by default
       if (user) {
         const res = await axios.post(
-          "/api/cart",
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`,
           { productId: product._id, quantity: 1 },
           { withCredentials: true } // Ensure cookies are sent
         );
@@ -125,7 +125,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const { id } = context.params!;
   try {
     // Use an absolute URL if needed, e.g.:
-    const res = await axios.get(`/api/products/${id}`);
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/products/${id}`);
     const product = res.data;
     return { props: { product } };
   } catch (error) {

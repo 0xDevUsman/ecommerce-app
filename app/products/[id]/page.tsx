@@ -13,10 +13,12 @@ interface Product {
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
   const  id  = (await params).id;
   let product: Product | null = null;
+  console.log(id)
 
   try {
     // Assuming your API endpoint is defined under /api/products
-    const res = await axios.get(`/api/products/${id}`);
+    console.log("hello world  ")
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/products/${id}`);
     product = res.data;
   } catch (error) {
     console.error("Error fetching product:", error);

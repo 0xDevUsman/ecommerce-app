@@ -27,7 +27,7 @@ const MyOrders = () => {
   useEffect(() => {
     const getOrder = async () => {
       try {
-        const { data } = await axios.get("/api/orders", {
+        const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/orders`, {
           withCredentials: true,
         });
         console.log("Orders fetched:", data.orders);
