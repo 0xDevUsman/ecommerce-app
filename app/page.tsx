@@ -77,7 +77,9 @@ const page = () => {
           </main>
         </section>
       </div>
-      <Footer />
+        <div className="mt-10">
+        <Footer />
+      </div>
     </>
   );
 };

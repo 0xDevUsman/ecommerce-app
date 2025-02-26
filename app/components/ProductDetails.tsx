@@ -114,7 +114,11 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
           </button>
         </div>
       </div>
-      <Footer />
+      <div className="mt-10">
+        <div className="mt-10">
+        <Footer />
+      </div>
+      </div>
     </>
   );
 };
