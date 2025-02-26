@@ -115,9 +115,7 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
         </div>
       </div>
       <div className="mt-10">
-        <div className="mt-10">
         <Footer />
-      </div>
       </div>
     </>
   );
