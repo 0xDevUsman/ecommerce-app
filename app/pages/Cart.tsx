@@ -70,7 +70,7 @@ const CartPage = () => {
     const fetchCart = async () => {
       try {
         const response = await axios.get<CartData>(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`,
+          "/api/cart",
           {
             withCredentials: true,
           }
@@ -94,7 +94,7 @@ const CartPage = () => {
 
   const handleDeleteItem = async (productId: string) => {
     try {
-      await axios.delete(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`, {
+      await axios.delete("/api/cart", {
         withCredentials: true,
         data: { productId },
       });
@@ -111,7 +111,7 @@ const CartPage = () => {
   }
 
   const makePayment = async ({ amount, name }: Product) => {
-    const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/payment`, {
+    const response = await axios.post("/api/payment", {
       amount: amount,
       name: name,
     });

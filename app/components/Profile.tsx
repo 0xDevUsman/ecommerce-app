@@ -25,7 +25,7 @@ const Profile = () => {
     // Option A: Get user details directly from token
     const fetchUserDetails = async () => {
       try {
-        const res = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/profile`);
+        const res = await axios.get("/api/profile");
         const data = res.data;
         if (res.status === 200) {
           setUser(data.user);
@@ -48,7 +48,7 @@ const Profile = () => {
 
   const logoutHandler = async () => {
     try {
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/auth/logout`);
+      const response = await axios.post("/api/auth/logout");
       if (response.status === 200) {
         window.location.href = "/";
       } else {
