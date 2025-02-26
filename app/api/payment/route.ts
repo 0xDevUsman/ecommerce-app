@@ -7,9 +7,10 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
+    console.log("Received payment request:", body);
     const session = await stripe.checkout.sessions.create({
-      success_url: "/confirm-order",
-      cancel_url: "/",
+      success_url: `${process.env.NEXT_PUBLIC_API_BASE_URL}/confirm-order`,
+      cancel_url: `${process.env.NEXT_PUBLIC_API_BASE_URL}/`,
       line_items: [
         {
           price_data: {
@@ -17,7 +18,7 @@ export async function POST(req: NextRequest) {
             product_data: {
               name: body.name,
             },
-            unit_amount: body.amount,
+            unit_amount: body.amount *100,
           },
           quantity: 1,
         },
@@ -26,6 +27,7 @@ export async function POST(req: NextRequest) {
     });
     return NextResponse.json({ message: session });
   } catch (error) {
+    console.error("Stripe API Error:", error);
     return NextResponse.json(
       {
         message: "Error creating checkout session",
